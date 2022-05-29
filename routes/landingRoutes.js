@@ -7,7 +7,7 @@ app.use(cp())
 
 app.get('/',(req,res)=>{
     console.log(req.cookies.auth)
-    res.render('dashboard')
+    res.render('landing')
 })
 
 app.get('/dashboard',async(req,res)=>{
@@ -17,10 +17,12 @@ app.get('/dashboard',async(req,res)=>{
             'Authorization' : `Bearer ${req.cookies.auth}`
         }
     }
-    await axios.get('http://localhost:8080/read/allPlace',config)
-    .then((response)=>{
-        res.render('dashboard',{data : response.data})
-    })
+    await axios.get('http://localhost:8080/read/all',config)
+    .then(async (response)=>{
+        res.render('dataTable', {datas : response.data})
 })
+
+})
+
 
 module.exports = app

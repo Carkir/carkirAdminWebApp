@@ -1,10 +1,11 @@
 <%- include('_header') %>
+<%const rupiah = Intl.NumberFormat('id-ID') %>
 
 <body>
     <%- include('_navbar') %>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-xl-10 col-xxl-9">
+            <div class="col-l-10 col-xxl-9">
                 <div class="card shadow">
                     <div class="card-header d-flex flex-wrap justify-content-center align-items-center justify-content-sm-between gap-3">
                         <h5 class="display-6 text-nowrap text-capitalize mb-0">Tempat Parkir</h5>
@@ -19,38 +20,27 @@
                                     <tr>
                                         <th>id</th>
                                         <th>name</th>
-                                        <th>alamat</th>
-                                        <th>priceLow</th>
-                                        <th>priceHigh</th>
-                                        <th>timeOpen</th>
-                                        <th>timeClose</th>
+                                        <th>Address</th>
+                                        <th>Normal Price</th>
+                                        <th>Higher Price</th>
+                                        <th>time</th>
                                         <th>status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% datas.forEach((value)=>{ %>
                                     <tr>
-                                        <td>Cell 1</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 3</td>
-                                        <td><button>edit</button></td>                                            
+                                        <td><%=value.tempatParkir%></td>
+                                        <td><%=value.name%></td>
+                                        <td><%=value.alamat%></td>
+                                        <td>Rp. <%=rupiah.format(value.priceLow)%></td>
+                                        <td>Rp. <%=rupiah.format(value.priceHigh)%></td>
+                                        <td><%=value.time%></td>
+                                        <td><%=value.status%></td>
+                                        <td><a href="/editTempatParkir/<%=value.tempatParkir%>">Edit</a></td>                                            
                                     </tr>
-                                    <tr>
-                                        <td>Cell 1</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 3</td>
-                                        <td><button>edit</button></td>    
-                                    </tr>
+                                    <% }) %>
                                 </tbody>
                             </table>
                         </div>
