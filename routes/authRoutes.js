@@ -16,10 +16,14 @@ app.post('/login', async(req,res)=>{
     }).then(
         (response)=>{
             if(Number(response.status) == 200){
-                res.redirect('dashboard')
+                res.cookie('auth',response.data).redirect('/dashboard')
+            }else{
+                res.redirect('/login')
             }
         }
-    )
+    ).catch(error=>{
+        res.redirect('/')
+    })
 })
 
 module.exports = app

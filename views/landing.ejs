@@ -3,15 +3,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Landing type</title>
     <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="/auth/login" method="post">
-        <input type="text" name="username" placeholder="username">
-        <input type="password" name="password" placeholder="password">
-        <input type="submit" placeholder="login">
-    </form>
+    <% if(error && error.length > 0) console.log(error) %>
+    <div class="loginCard">
+        <h1>Login</h1>
+        <form id="loginForm" action="/auth/login" method="post">
+            <div class="formControl">
+                <input type="text" class="textInput" name="username" placeholder="username">
+            </div>
+            <div class="formControl">
+                <input type="password" class="textInput" name="password" placeholder="password">
+            </div>
+            <div class="formControl">
+                <input type="submit" placeholder="login" value="sign in" class="submitInput">
+            </div>
+        </form>
+    </div>
 </body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </html>
