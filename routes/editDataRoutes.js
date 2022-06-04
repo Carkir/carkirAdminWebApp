@@ -4,7 +4,6 @@ const axios = require('axios').default
 const cp = require('cookie-parser')
 const fileupload = require('express-fileupload')
 const bp = require('body-parser')
-const { response } = require('./landingRoutes')
 
 app.use(cp())
 app.use(bp.urlencoded({extended: true}))
@@ -16,9 +15,7 @@ app.get('/:id', async(req, res) => {
 
   await axios.get(`http://localhost:8080/read/${name}`, { headers : { Authorization : `Bearer ${req.cookies.auth}`}})
   .then((response)=>{
-    console.log(response.data)
     if(Number(response.status) == 200){
-      console.log(response.data)
       res.render('editDataForm',{data : response.data})
     }
   }).catch(err=>{
@@ -31,10 +28,11 @@ app.get('/:id', async(req, res) => {
     const open = new Date()
     const close = new Date()
     const name = req.body.name
-    const image = req.files.Image.data
-    if(!req.files.Image){
+    var image = await req.files.image.data.toString('base64')
+    if(!req.files.image){
       image = req.body.imagebackup
     }
+    console.log(`gambar ${image}`)
     const alamat = req.body.alamat
     const priceHigh = req.body.priceHigh
     const priceLow = req.body.priceLow
@@ -58,10 +56,12 @@ app.get('/:id', async(req, res) => {
       if(Number(response.data) < 300){
         res.redirect('/dashboard')
       }else{
-        res.redirect(`editTempatParkir/${id}`)
+        console.log('wew')
+        console.log(response.status)
+        res.redirect(`/editTempatParkir/${id}`)
       }
     }).catch(err=>{
-      res.redirect(`editTempatParkir/${id}`)
+      res.redirect(`/editTempatParkir/${id}`)
     })
   })
 
